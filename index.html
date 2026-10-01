@@ -7,6 +7,59 @@
     <link rel="stylesheet" href="styles/style.css" />
   </head>
   <body>
+    <!-- main section  -->
+    <main>
+      <div class="container">
+        <!-- left side -->
+        <div class="left-container">
+          <h2 class="left-container-title">Income Expense Tracker</h2>
+          <p class="balance-title">Your Balance</p>
+          <p class="main-balance">$<span>0.00</span></p>
+          <div class="income-and-expense-container">
+            <!-- income box -->
+            <div class="income-box">
+              <h2>Income</h2>
+              <p>$<span>0.00</span></p>
+            </div>
+            <!-- Expense box -->
+            <div class="expense-box">
+              <h2>Expense</h2>
+              <p>$<span>0</span></p>
+            </div>
+          </div>
+          <div class="add-transection-section">
+            <div class="des-input">
+              <label for="des">Description</label> <br />
+              <input
+                type="text"
+                name="des"
+                id="des"
+                placeholder="Enter Description"
+              />
+            </div>
+            <div>
+              <label for="amount">Amount</label> <br />
+              <input
+                type="number"
+                name="amount"
+                id="amount"
+                placeholder="Amount"
+              />
+            </div>
+            <button class="add-transection-btn">Add Transection</button>
+          </div>
+        </div>
+        <!-- right side  -->
+        <div class="right-container">
+          <h2>Transection Details</h2>
+          <hr />
+          <!-- transection history container  -->
+          <div class="transection-history-container">
+            <p>hello</p>
+          </div>
+        </div>
+      </div>
+    </main>
     <script src="scripts/script.js"></script>
   </body>
 </html>
