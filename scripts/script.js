@@ -1,4 +1,5 @@
 const storageKey = "income-tracker-state";
+const themeStorageKey = "income-tracker-theme";
 const transectionForm = document.querySelector(".add-transection-section");
 const descriptionInput = document.querySelector("#des");
 const amountInput = document.querySelector("#amount");
@@ -9,6 +10,7 @@ const transectionHistory = document.querySelector(
   ".transection-history-container",
 );
 const storageMessage = document.querySelector(".storage-message");
+const themeButton = document.querySelector(".theme-customization-btn");
 
 const state = {
   balance: 0,
@@ -16,6 +18,34 @@ const state = {
   expense: 0,
   transactions: [],
 };
+
+function applyTheme(themeName) {
+  const nextTheme = themeName === "dark" ? "dark" : "light";
+  document.body.dataset.theme = nextTheme;
+
+  if (!themeButton) {
+    return;
+  }
+
+  themeButton.dataset.theme = nextTheme;
+  themeButton.setAttribute("aria-pressed", String(nextTheme === "dark"));
+  themeButton.textContent = nextTheme === "dark" ? "☀️ Light" : "🌙 Dark";
+  themeButton.setAttribute(
+    "aria-label",
+    nextTheme === "dark" ? "Switch to light theme" : "Switch to dark theme",
+  );
+
+  try {
+    localStorage.setItem(themeStorageKey, nextTheme);
+  } catch (error) {
+    console.error("Unable to save theme choice.", error);
+  }
+}
+
+function loadTheme() {
+  const savedTheme = localStorage.getItem(themeStorageKey);
+  applyTheme(savedTheme === "dark" ? "dark" : "light");
+}
 
 function showStorageMessage(message) {
   storageMessage.textContent = message;
@@ -99,6 +129,7 @@ function loadState() {
 }
 
 try {
+  loadTheme();
   loadState();
   renderState();
 } catch (error) {
@@ -107,6 +138,13 @@ try {
   );
   transectionForm.querySelector("button[type='submit']").disabled = true;
   console.error("Unable to load income tracker data.", error);
+}
+
+if (themeButton) {
+  themeButton.addEventListener("click", () => {
+    const currentTheme = document.body.dataset.theme === "dark" ? "dark" : "light";
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
+  });
 }
 
 transectionForm.addEventListener("submit", (event) => {
