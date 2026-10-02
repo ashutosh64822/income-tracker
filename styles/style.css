@@ -6,6 +6,7 @@
 }
 body {
   background-color: rgb(225, 248, 248);
+  min-width: 320px;
 }
 
 /* main section  */
@@ -19,14 +20,15 @@ main {
 .container {
   display: flex;
   justify-content: center;
-  width: 55%;
+  width: min(960px, calc(100% - 32px));
   max-width: 1280px;
   box-shadow: -1px 4px 21px -1px black;
 }
 
 .left-container,
 .right-container {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 /* left container  */
@@ -41,12 +43,14 @@ main {
 
 .left-container-title {
   color: rgb(243, 158, 1);
+  overflow-wrap: anywhere;
 }
 .balance-title {
   color: snow;
   margin: 10px 0px;
 }
-.main-balance {
+.main-balance,
+.dolarSign {
   font-weight: 600;
   font-size: 25px;
 }
@@ -68,6 +72,10 @@ main {
   border: 2px solid red;
   padding: 10px;
 }
+.storage-message {
+  color: #b00020;
+  margin-top: 12px;
+}
 /* add-transection-section */
 .des-input {
   margin-top: 30px;
@@ -75,6 +83,7 @@ main {
 }
 #des,
 #amount {
+  display: block;
   border: none;
   outline: none;
   color: black;
@@ -96,12 +105,101 @@ main {
   border-radius: 8px;
   cursor: pointer;
 }
+.add-transection-btn:focus-visible,
+.delete-transection-btn:focus-visible,
+#des:focus-visible,
+#amount:focus-visible {
+  outline: 2px solid #f39e01;
+  outline-offset: 2px;
+}
 
 /* right side container  */
 .right-container {
   background-color: white;
   padding: 30px 20px;
 }
-.transection-history-container{
+.transection-history-container {
   margin: 10px 0;
+  display: grid;
+  gap: 10px;
+}
+.transection-item {
+  position: relative;
+  padding: 12px 42px 12px 12px;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+.transection-description {
+  font-weight: 600;
+}
+.transection-amount {
+  margin-top: 6px;
+  color: rgb(8, 150, 8);
+}
+.delete-transection-btn {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  color: #b00020;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+@media (max-width: 700px) {
+  main {
+    min-height: 100vh;
+    align-items: flex-start;
+    padding: 20px 0;
+  }
+
+  .container {
+    flex-direction: column;
+    width: min(100% - 24px, 520px);
+  }
+
+  .left-container,
+  .right-container {
+    padding: 24px 20px;
+  }
+
+  .income-and-expense-container {
+    justify-content: flex-start;
+  }
+
+  .income-box,
+  .expense-box {
+    flex: 1;
+  }
+}
+
+@media (max-width: 380px) {
+  main {
+    padding: 12px 0;
+  }
+
+  .container {
+    width: calc(100% - 16px);
+  }
+
+  .left-container,
+  .right-container {
+    padding: 20px 14px;
+  }
+
+  .left-container-title {
+    font-size: 1.35rem;
+  }
+
+  .income-and-expense-container {
+    gap: 10px;
+  }
+
+  .income-box,
+  .expense-box {
+    padding: 10px;
+  }
 }
